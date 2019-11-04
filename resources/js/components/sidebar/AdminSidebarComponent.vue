@@ -1,22 +1,23 @@
 <template>
+<div>
 <ul class="sidebar-menu tree" data-widget="tree">
         <li class="header">NAVEGAÇÃO ADMINISTRADORES</li>
         <li class="active treeview">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Usuários</span>
-            <span class="pull-right-container">
+            <!-- <span class="pull-right-container">
               <span class="label label-primary pull-right">4</span>
-            </span>
+            </span> -->
           </a>
         </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-users"></i>
             <span>Funcionários</span>
-            <span class="pull-right-container">
+            <!-- <span class="pull-right-container">
               <span class="label label-primary pull-right">10</span>
-            </span>
+            </span> -->
           </a>
         </li>
         <li class="header">TURMAS E SÉRIES</li>
@@ -29,7 +30,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="#" data-toggle="modal" data-target="#modalSerie">
             <i class="fa fa-th"></i>
             <span>Nova turma</span>
           </a>
@@ -101,6 +102,7 @@
             </a>    
         </li>
     </ul>
+</div>
 </template>
 
 <script>

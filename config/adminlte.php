@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Bebê Fofo',
+    'title' => 'Casa do Saber',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>BEBÊ</b>Fofo',
+    'logo' => 'Casa do <b>Saber</b>',
 
-    'logo_mini' => '<b>B</b>F',
+    'logo_mini' => 'C<b>B</b>',
 
     /*
     |--------------------------------------------------------------------------

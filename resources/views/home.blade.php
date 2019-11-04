@@ -13,7 +13,7 @@
     @endcan
 
     @can('isAdmin')
-        Bem-vindo administrador
+        <admin-component></admin-component>
     @endcan
 
     @can('isProfessor')
