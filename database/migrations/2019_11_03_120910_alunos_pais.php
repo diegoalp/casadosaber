@@ -14,9 +14,9 @@ class AlunosPais extends Migration
     public function up()
     {
         Schema::create('alunos_pais', function (Blueprint $table) {
-            $table->integer('aluno_id')->unsigned();
+            $table->unsignedBigInteger('aluno_id');
             $table->foreign('aluno_id')->references('id')->on('alunos');
-            $table->integer('pai_id')->unsigned();
+            $table->unsignedBigInteger('pai_id');
             $table->foreign('pai_id')->references('id')->on('pais');
             $table->primary(['aluno_id','pai_id']);
             $table->timestamps();

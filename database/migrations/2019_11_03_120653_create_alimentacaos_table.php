@@ -17,7 +17,7 @@ class CreateAlimentacaosTable extends Migration
             $table->bigIncrements('id');
             $table->string('descricao');
             $table->date('data');
-            $table->integer('aluno_id')->unsigned();
+            $table->unsignedBigInteger('aluno_id');
             $table->foreign('aluno_id')->references('id')->on('alunos');
             $table->timestamps();
         });

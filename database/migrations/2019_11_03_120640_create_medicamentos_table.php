@@ -17,7 +17,7 @@ class CreateMedicamentosTable extends Migration
             $table->bigIncrements('id');
             $table->string('medicamento');
             $table->time('horario');
-            $table->integer('aluno_id')->unsigned();
+            $table->unsignedBigInteger('aluno_id');
             $table->foreign('aluno_id')->references('id')->on('alunos');
             $table->timestamps();
         });

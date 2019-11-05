@@ -20,7 +20,7 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>15</h3>
+                    <h3><div v-if="qtdProfessores">{{ qtdProfessores }}</div></h3>
                     <!-- <h3>53<sup style="font-size: 20px">%</sup></h3> -->
 
                     <p>Professores</p>
@@ -36,7 +36,9 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3><div v-if="qtdUsuarios">{{ qtdUsuarios }}</div></h3>
+                    <h3>
+                        <div v-if="qtdUsuarios">{{ qtdUsuarios }}</div>
+                    </h3>
 
                     <p>Usuários do Sistema</p>
                 </div>
@@ -177,78 +179,35 @@
             <!-- /.box -->
         </div>
     </div>
+    <!-- Listagem de turmas -->
+    <div class="box box-primary">
+        <div class="box-header ui-sortable-handle" style="cursor: move;">
+            <i class="ion ion-clipboard"></i>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalSerie" tabindex="-9" role="dialog" aria-labelledby="modalSerieLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form class="form-horizontal" id="formTurma" @submit="novaTurma">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Nova turma</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-md-12">
-                            <input type="hidden" id="id" class="form-control">
-                            <input type="hidden" id="id" class="form-control">
-                            <div class="form-group">
-                                <label for="turma">Nome</label><br />
-                                <input type="text" class="form-control" v-model="turma.titulo" id="nomeTurma" placeholder="Título da Turma" />
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-4">
-                                        <label for="turma">Turno</label><br />
-                                        <select class="form-control" id="turnoTurma" v-model="turma.turno" name="turnoTurma">
-                                            <option value="Matutino">Matutino</option>
-                                            <option value="Vespertino">Vespertino</option>
-                                            <option value="Integral">Integral</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-12 col-md-4">
-                                        <label for="turma">Série (Ensino)</label><br />
-                                        <select class="form-control" v-model="turma.ensino" id="ensino" name='ensino'>
-                                            <option value="Infantil">Infantil</option>
-                                            <option value="Fundamental I">Fundamental I</option>
-                                            <option value="Fundamental I">Fundamental II</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="col-sm-12 col-md-4">
-                                        <label for="turma">Ano Letivo</label><br />
-                                        <select class="form-control" id="anoLetivo" v-model="turma.ano_letivo" name='anoLetivo'>
-                                            <option v-for="ano in lista_anos" v-bind:value="ano.id"> {{ ano.ano }} </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="turma">Hora de Entrada</label><br />
-                                        <input type="time" class="form-control" v-model="turma.hora_entrada" name="horaEntrada" id="horaEntrada" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="turma">Hora de Saída</label><br />
-                                        <input type="time" class="form-control" v-model="turma.hora_saida" name="horaSaida" id="horaSaida" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
-                </div>
-            </form>
+            <h3 class="box-title">TURMAS</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+            <ul class="todo-list ui-sortable">
+                <li v-for="turma in lista_turmas.data" :key="turma.id"> 
+                    <span class="text"><strong>{{ turma.titulo }}</strong></span>
+                    <span class="label label-primary">{{ turma.anoletivo.ano }}</span>
+                    <span class="label label-success">{{ turma.ensino }}</span>
+                    <span class="label label-warning">{{ turma.turno }}</span>
+                </li>
+            </ul>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix no-border">
+        <div class="box-tools pull-left">
+                <pagination :data="lista_turmas" @pagination-change-page="loadTurmas">
+                    <span slot="prev-nav">&lt; Anterior</span>
+                    <span slot="next-nav">Próxima &gt;</span>
+                </pagination>
+            </div>
         </div>
     </div>
-    <!-- Fim da modal de nova turma -->
-
 </div>
 </template>
 
@@ -259,6 +218,8 @@ export default {
             anoLetivo: '',
             lista_anos: {},
             qtdUsuarios: '',
+            qtdProfessores: '',
+            lista_turmas: {},
             turma: {
                 titulo: '',
                 turno: '',
@@ -323,11 +284,11 @@ export default {
                 .catch(function (error) {
                     // Se tiver erros
                     Swal.fire({
-                    position: 'center',
-                    type: 'warning',
-                    title: 'Não existe ano letivo informado ou não foi possível carregar.',
-                    showConfirmButton: false,
-                    timer: 1500
+                        position: 'center',
+                        type: 'warning',
+                        title: 'Não existe ano letivo informado ou não foi possível carregar.',
+                        showConfirmButton: false,
+                        timer: 1500
                     })
                 })
         },
@@ -338,48 +299,29 @@ export default {
                     // Sucesso
                     _this.qtdUsuarios = response.data;
                 })
-                .catch(function (error) {
-                    // Se tiver erros
-                })
-                .then(function () {
-                    // Executar algo
-                });
         },
-        novaTurma(e){
-                e.preventDefault();
-                let currentObj = this;
-                const config = {
-                    headers:{'content-type':'application/json'}
-                }
-                console.log(this.turma);
-                axios.post('/api/novaturma', this.turma, config)
-                    .then(function (response){
-                        currentObj.success = response.data.success;
-                        Swal.fire({
-                        position: 'center',
-                        type: 'success',
-                        title: 'Nova turma cadastrada com sucesso.',
-                        showConfirmButton: false,
-                        timer: 1500
+        loadQtdProfessores: function () {
+            var _this = this;
+            axios.get('/api/qtdprofs')
+                .then(function (response) {
+                    // Sucesso
+                    _this.qtdProfessores = response.data;
+                })
+        },
+        loadTurmas(page = 1) {
+                axios.get('/api/turmas?page=' + page)
+                    .then(response => {
+                        this.lista_turmas = response.data;
                     });
-                    })
-                    .catch(function (error) {
-                        currentObj.output = error;
-                        Swal.fire({
-                            position: 'center',
-                            type: 'error',
-                            title: 'Erro ao cadastrar turma. <br/>Tente novamente.',
-                            showConfirmButton: false,
-                            timer: 1500
-                    });
-
-                    });
+                    
             },
     },
     mounted() {
         this.loadAnoAtual();
         this.loadQtdUsuarios();
         this.loadAnosLetivos();
+        this.loadTurmas();
+        this.loadQtdProfessores();
     }
 };
 </script>

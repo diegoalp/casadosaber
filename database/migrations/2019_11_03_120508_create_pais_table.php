@@ -21,7 +21,9 @@ class CreatePaisTable extends Migration
             $table->string('ci');
             $table->string('cpf', 14)->unique();
             $table->string('celular');
-            $table->integer('buscarNaEscola');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

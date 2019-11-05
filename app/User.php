@@ -5,10 +5,21 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+    protected $dates = ['deleted_at'];
+
+    public function funcionario(){
+        return $this->belongsTo('App\FuncrionarioUsuario', 'id', 'user_id');
+    }
+
+    function pai(){
+        return $this->belongsTo('App\Pai', 'id', 'user_id');
+    }
 
     /**
      * The attributes that are mass assignable.

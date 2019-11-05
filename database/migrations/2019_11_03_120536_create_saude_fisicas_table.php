@@ -18,7 +18,7 @@ class CreateSaudeFisicasTable extends Migration
             $table->float('altura');
             $table->float('peso');
             $table->date('data');
-            $table->integer('aluno_id')->unsigned();
+            $table->unsignedBigInteger('aluno_id');
             $table->foreign('aluno_id')->references('id')->on('alunos');
             $table->timestamps();
         });

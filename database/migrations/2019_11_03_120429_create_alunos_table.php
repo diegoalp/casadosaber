@@ -19,7 +19,6 @@ class CreateAlunosTable extends Migration
             $table->string('matricula')->unique();
             $table->string('foto');
             $table->date('data_nasc');
-            $table->string('naturalidade');
             $table->string('nacionalidade');
             $table->string('endereco');
             $table->string('bairro');
