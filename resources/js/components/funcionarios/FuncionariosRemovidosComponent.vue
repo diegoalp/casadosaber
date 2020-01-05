@@ -49,14 +49,14 @@
         },
         methods:{
             getResults(page = 1) {
-                axios.get('/api/funcionarios/removidos?page=' + page)
+                axios.get('/funcionarios/removidos?page=' + page)
                     .then(response => {
                         this.func = response.data;
                     });
             },
             loadFunc: function() {
                 var _this = this;
-                axios.get('/api/funcionarios/removidos')
+                axios.get('/listafuncionarios/removidos')
                     .then(function (response) {
                         // Sucesso
                         _this.func = response.data;
@@ -73,7 +73,7 @@
                     })
             },
             removerFuncionario(id){
-                axios.delete('/api/funcionarios/excluir/' + id)
+                axios.delete('/funcionarios/excluir/' + id)
                     .then((response) => {
                         Swal.fire({
                         position: 'center',
@@ -94,7 +94,7 @@
                 this.loadFunc();
             },
             restaurarFuncionario(id){
-                axios.post('/api/funcionarios/restaurar/' + id)
+                axios.post('/funcionarios/restaurar/' + id)
                     .then((response) => {
                         Swal.fire({
                         position: 'center',

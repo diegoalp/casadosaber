@@ -67,14 +67,14 @@ export default {
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         },
         getResults(page = 1) {
-            axios.get('/api/alunos?page=' + page)
+            axios.get('/listaalunos?page=' + page)
                 .then(response => {
                     this.alunos = response.data;
                 });
         },
         loadAlunos: function () {
             var _this = this;
-            axios.get('/api/alunos')
+            axios.get('/listaalunos')
                 .then(function (response) {
                     // Sucesso
                     _this.alunos = response.data;
@@ -91,7 +91,7 @@ export default {
                 })
         },
         removerAluno(id) {
-            axios.delete('/api/aluno/' + id)
+            axios.delete('/aluno/' + id)
                 .then((response) => {
                     Swal.fire({
                         position: 'center',

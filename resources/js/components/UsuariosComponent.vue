@@ -96,7 +96,7 @@ export default {
     },
     methods:{
         loadUsuarios(page = 1) {
-                axios.get('/api/usuarios?page=' + page)
+                axios.get('/listausuarios?page=' + page)
                     .then(response => {
                         this.lista_usuarios= response.data;
                     });
@@ -110,7 +110,7 @@ export default {
                     'content-type': 'application/json'
                 }
             }
-            axios.post('/api/novousuario', this.usuario, config)
+            axios.post('/novousuario', this.usuario, config)
                 .then(function (response) {
                     currentObj.success = response.data.success;
                     Swal.fire({
@@ -140,7 +140,7 @@ export default {
                 $('body').removeClass('modal-open');
         },
         removerUsuario(id){
-                axios.delete('/api/usuario/' + id)
+                axios.delete('/usuario/' + id)
                     .then((response) => {
                         Swal.fire({
                         position: 'center',

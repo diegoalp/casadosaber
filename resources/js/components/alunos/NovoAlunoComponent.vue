@@ -221,7 +221,7 @@
                 console.log(formData);
 
 
-                axios.post('/api/aluno/novo', formData, config)
+                axios.post('/aluno/cadastrar', formData, config)
                     .then(function (response){
                         currentObj.success = response.data.success;
                         Swal.fire({

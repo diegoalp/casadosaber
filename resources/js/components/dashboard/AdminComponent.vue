@@ -72,24 +72,18 @@
         <div class="col-md-4">
             <div class="box box-success collapsed-box">
                 <div class="box-header with-border" data-widget="collapse">
-                    <h3 class="box-title"><i class="fa fa-video-camera" aria-hidden="true"></i> ACESSO CÂMERAS</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                        </button>
-                    </div>
+                    <h3 class="box-title"><i class="fa fa-video" aria-hidden="true"></i> ACESSO CÂMERAS</h3>
                     <!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body" style="">
-                    <form id="arquivo-cameras" enctype="multipart/form-data">
-
+                    <form @submit="formCameras" enctype="multipart/form-data">
                         <div class="panel-body">
-                            <div class="form-group">
+                            <div class="form-group col-sm-12">
                                 <label>Selecionar:</label>
-                                <input type="file" class="form-control-file" id="acesso_cameras" name="acesso_cameras" required>
+                                <input type="file" class="form-control-file" v-on:change="arqAcesso" id="acesso_cameras" name="acesso_cameras"  required>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-sm-12">
                                 <button class="btn btn-primary btn-cameras">Enviar</button>
                             </div>
                         </div>
@@ -104,31 +98,31 @@
             <div class="box box-success collapsed-box">
                 <div class="box-header with-border" data-widget="collapse">
                     <h3 class="box-title"><i class="fa fa-calendar" aria-hidden="true"></i> ROTINA</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                        </button>
-                    </div>
                     <!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body" style="">
-                    <form>
+                    <form @submit="formRotina" enctype="multipart/form-data">
                         <div class="panel-body">
 
-                            <div class="form-group">
-                                <label>Selecionar:</label>
-                                <input type="file" class="form-control-file" id="programacaoSemanal" name="programacaoSemanal">
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label for="titulo">Nome:</label><br/>
+                                <input type="text" class="form-control" v-model="titulo_rotina" name="titulo" id="titulo" required>
                             </div>
-                            <div class="form-group">
-                                <label>Turma:</label><br />
-                                <select name="turmaProgramacao" id="turmaProgramacao">
-                                    <option value="Berçario">Bercário</option>
-                                    <option value="Infantil">Infantil</option>
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label for="arquivo">Arquivo:</label>
+                                <input type="file" class="form-control-file" v-on:change="selectArquivoCardapio" id="arquivo" name="arquivo"
+                                    required>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label>Ensino:</label><br/>
+                                <select name="ensino" v-model="ensino_rotina" id="ensino" required>
+                                    <option value="1">Bercário</option>
+                                    <option value="2">Infantil</option>
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group col-sm-12 col-md-2">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
                         </div>
@@ -144,31 +138,31 @@
             <div class="box box-success collapsed-box">
                 <div class="box-header with-border" data-widget="collapse">
                     <h3 class="box-title"><i class="fa fa-calendar" aria-hidden="true"></i> CARDÁPIO</h3>
-
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
-                        </button>
-                    </div>
                     <!-- /.box-tools -->
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body" style="">
-                    <form>
+                <div class="box-body">
+                    <form @submit="formCardapio" enctype="multipart/form-data">
                         <div class="panel-body">
 
-                            <div class="form-group">
-                                <label>Selecionar:</label>
-                                <input type="file" class="form-control-file" id="programacaoSemanal" name="programacaoSemanal">
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label for="titulo">Nome:</label><br/>
+                                <input type="text" class="form-control" v-model="titulo_cardapio" name="titulo" id="titulo" required>
                             </div>
-                            <div class="form-group">
-                                <label>Turma:</label><br />
-                                <select name="turmaProgramacao" id="turmaProgramacao">
-                                    <option value="Berçario">Bercário</option>
-                                    <option value="Infantil">Infantil</option>
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label for="arquivo">Arquivo:</label>
+                                <input type="file" class="form-control-file" v-on:change="selectArquivo" id="arquivo" name="arquivo"
+                                    required>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-12">
+                                <label>Ensino:</label><br/>
+                                <select name="ensino" v-model="ensino_cardapio" id="ensino" required>
+                                    <option value="1">Bercário</option>
+                                    <option value="2">Infantil</option>
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group col-sm-12 col-md-2">
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                             </div>
                         </div>
@@ -228,13 +222,20 @@ export default {
                 hora_entrada: '',
                 hora_saida: '',
 
-            }
+            },
+            acesso_cameras: '',
+            titulo_rotina: '',
+            arquivo_rotina: '',
+            ensino_rotina: '',
+            titulo_cardapio: '',
+            arquivo_cardapio: '',
+            ensino_cardapio: '',
         }
     },
     methods: {
         loadAnoAtual: function () {
             var _this = this;
-            axios.get('/api/anoatual')
+            axios.get('/anoatual')
                 .then(function (response) {
                     // Sucesso
                     _this.anoLetivo = response.data.ano;
@@ -254,7 +255,7 @@ export default {
         },
         novoAno: function () {
             var _this = this;
-            axios.get('/api/novoano')
+            axios.get('/novoano')
                 .then(function (response) {
                     // Sucesso
                     Swal.fire({
@@ -265,18 +266,11 @@ export default {
                         timer: 1500
                     });
                 })
-                .catch(function (error) {
-                    // Se tiver erros
-                    console.log(error);
-                })
-                .then(function () {
-                    // Executar algo
-                });
-            this.loadAnoAtual();
+                this.loadAnoAtual();
         },
         loadAnosLetivos: function () {
             var _this = this;
-            axios.get('/api/anoletivo')
+            axios.get('/anoletivo')
                 .then(function (response) {
                     // Sucesso
                     _this.lista_anos = response.data;
@@ -294,7 +288,7 @@ export default {
         },
         loadQtdUsuarios: function () {
             var _this = this;
-            axios.get('/api/qtdusuarios')
+            axios.get('/qtdusuarios')
                 .then(function (response) {
                     // Sucesso
                     _this.qtdUsuarios = response.data;
@@ -302,18 +296,137 @@ export default {
         },
         loadQtdProfessores: function () {
             var _this = this;
-            axios.get('/api/qtdprofs')
+            axios.get('/qtdprofs')
                 .then(function (response) {
                     // Sucesso
                     _this.qtdProfessores = response.data;
                 })
         },
         loadTurmas(page = 1) {
-                axios.get('/api/turmas?page=' + page)
+                axios.get('/listaturmas?page=' + page)
                     .then(response => {
                         this.lista_turmas = response.data;
                     });
                     
+        },
+        arqAcesso(e){
+                console.log(e.target.files[0]); //Mostra as informações do arquivo
+                this.acesso_cameras = e.target.files[0];
+            },
+            selectArquivo(e){
+                this.arquivo_rotina= e.target.files[0];
+            },
+            selectArquivoCardapio(e){
+                this.arquivo_cardapio= e.target.files[0];
+            },
+            formCameras(e){
+                e.preventDefault();
+                let currentObj = this;
+
+                const config = {
+                    headers:{'content-type':'multipart/form-data'}
+                }
+
+                let formData = new FormData();
+                formData.append('acesso_cameras', this.acesso_cameras);
+
+                axios.post('/acessocameras', formData, config)
+                    .then(function (response){
+                        currentObj.success = response.data.success;
+                        Swal.fire({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Arquivo enviado com sucesso.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+                    .catch(function (error) {
+
+                        currentObj.output = error;
+                        Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: 'Erro ao enviar o arquivo. Certifique-se que é um arquivo pdf válido.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                    });
+            },
+            formRotina(e){
+                e.preventDefault();
+                let currentObj = this;
+
+                const config = {
+                    headers:{'content-type':'multipart/form-data'}
+                }
+
+                let formData = new FormData();
+                formData.append('titulo', this.titulo_rotina);
+                formData.append('arquivo', this.arquivo_rotina);
+                formData.append('ensino', this.ensino_rotina);
+
+                console.log(formData);
+
+                axios.post('api/novarotina', formData, config)
+                    .then(function (response){
+                        currentObj.success = response.data.success;
+                        Swal.fire({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Arquivo enviado com sucesso.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+                    .catch(function (error) {
+                        currentObj.output = error;
+                        Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: 'Erro ao enviar o arquivo. Certifique-se que é um arquivo pdf válido.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                    });
+            },
+            formCardapio(e){
+                e.preventDefault();
+                let currentObj = this;
+
+                const config = {
+                    headers:{'content-type':'multipart/form-data'}
+                }
+
+                let formData = new FormData();
+                formData.append('titulo_cardapio', this.titulo_cardapio);
+                formData.append('arquivo_cardapio', this.arquivo_cardapio);
+                formData.append('ensino_cardapio', this.ensino_cardapio);
+                console.log(formData);
+
+                axios.post('api/cardapio', formData, config)
+                    .then(function (response){
+                        currentObj.success = response.data.success;
+                        Swal.fire({
+                            position: 'center',
+                            type: 'success',
+                            title: 'Arquivo enviado com sucesso.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+                    .catch(function (error) {
+                        currentObj.output = error;
+                        Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: 'Erro ao enviar o arquivo. Certifique-se que é um arquivo pdf válido.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    });
             },
     },
     mounted() {

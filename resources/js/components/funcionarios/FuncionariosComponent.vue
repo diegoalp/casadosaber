@@ -133,14 +133,14 @@
                 return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
             },
             getResults(page = 1) {
-                axios.get('/api/funcionarios?page=' + page)
+                axios.get('/funcionarios?page=' + page)
                     .then(response => {
                         this.funcionarios = response.data;
                     });
             },
             loadFuncionarios: function() {
                 var _this = this;
-                axios.get('/api/funcionarios')
+                axios.get('/listafuncionarios')
                     .then(function (response) {
                         // Sucesso
                         _this.funcionarios = response.data;
@@ -157,7 +157,7 @@
                     })
             },
             removerFuncionario(id){
-                axios.delete('/api/funcionarios/' + id)
+                axios.delete('/funcionarios/' + id)
                     .then((response) => {
                         Swal.fire({
                         position: 'center',

@@ -129,7 +129,7 @@ export default {
     },
     methods:{
         loadTurmas(page = 1) {
-                axios.get('/api/turmas?page=' + page)
+                axios.get('/listaturmas?page=' + page)
                     .then(response => {
                         this.lista_turmas = response.data;
                     });
@@ -137,7 +137,7 @@ export default {
         },
         loadAnosLetivos: function () {
             var _this = this;
-            axios.get('/api/anoletivo')
+            axios.get('/anoletivo')
                 .then(function (response) {
                     // Sucesso
                     _this.lista_anos = response.data;
@@ -161,7 +161,7 @@ export default {
                     'content-type': 'application/json'
                 }
             }
-            axios.post('/api/novaturma', this.turma, config)
+            axios.post('/novaturma', this.turma, config)
                 .then(function (response) {
                     currentObj.success = response.data.success;
                     Swal.fire({
@@ -199,7 +199,7 @@ export default {
             this.turma.hora_saida = '';
         },
         removerTurma(id){
-                axios.delete('/api/turmas/' + id)
+                axios.delete('/turmas/' + id)
                     .then((response) => {
                         Swal.fire({
                         position: 'center',

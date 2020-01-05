@@ -273,7 +273,7 @@
                 formData.append('nivel_acesso', this.nivel_acesso);
                 formData.append('senha', this.senha);
 
-                axios.post('/api/funcionario/novo', formData, config)
+                axios.post('/funcionario/novo', formData, config)
                     .then(function (response){
                         currentObj.success = response.data.success;
                         Swal.fire({

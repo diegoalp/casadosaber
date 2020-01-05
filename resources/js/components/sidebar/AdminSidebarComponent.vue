@@ -91,8 +91,8 @@
             </span> -->
           </a>
         </li>
-        <li class="header">FINANCEIRO</li>
-        <li class="treeview">
+        <!-- <li class="header">FINANCEIRO</li>
+        <li class="treeview disabled">
             <a href="#">
                 <i class="fa fa-plus"></i>
                 <span>Contas a receber</span>
@@ -103,7 +103,7 @@
                 <i class="fa fa-window-minimize"></i>
                 <span>Contas a pagar</span>
             </a>    
-        </li>
+        </li> -->
         <li class="header">ARQUIVOS</li>
         <li class="treeview">
             <a href="#">

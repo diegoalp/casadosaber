@@ -48,7 +48,7 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        $responsavel = Pai::where('cpf', 'like', '%'.$request->input('cpf').'%')->first();
+        $responsavel = Pai::where('cpf', '=', '%'.$request->input('cpf').'%')->get()->first();
         $qtdAlunos = Aluno::withTrashed()->count() + 1;
         $dataAtual = new Carbon();
         $data = $dataAtual->format('Y');
@@ -84,31 +84,43 @@ class AlunoController extends Controller
         $aluno->tipo_sanguineo = $request->input('tipo_sanguineo');
         $aluno->save();
 
-        if(isset($responsavel)){
+        if($responsavel){
             $aluno->pai()->attach($responsavel);
         }else{
+            if($request->input('grau_parentesco') === "Pai" || $request->input('grau_parentesco') === "Mãe"){
 
-            if($request->input('grau_parentesco')== '1' || $request->input('grau_parentesco') == '2'){
-
-                $senha = preg_replace( '#[^0-9]#', '', $request->input('cpf'));
+                $senha = Hash::make(preg_replace( '#[^0-9]#', '', $request->input('cpf')));
 
                 $user = new User();
                 $user->name = $request->input('nome_responsavel');
+                $user->email = $request->input('email');
                 $user->password = $senha;
-                $user->user_type = "professor";
+                $user->user_type = "pai";
                 $user->save();
+
+                $responsavel = new Pai();
+                $responsavel->nome = $request->input('nome_responsavel');
+                $responsavel->grau_parentesco = $request->input('grau_parentesco');
+                $responsavel->data_nasc = \Carbon\Carbon::parse($request->input('data_nasc_responsavel'));
+                $responsavel->ci = $request->input('ci');
+                $responsavel->cpf = $request->input('cpf');
+                $responsavel->celular = $request->input('celular');
+                $responsavel->user_id = $user->id;
+                $responsavel->save();
+
+            }else{
+                dd('Chegou aqui!');
+                $responsavel = new Pai();
+                $responsavel->nome = $request->input('nome_responsavel');
+                $responsavel->grau_parentesco = $request->input('grau_parentesco');
+                $responsavel->data_nasc = \Carbon\Carbon::parse($request->input('data_nasc_responsavel'));
+                $responsavel->ci = $request->input('ci');
+                $responsavel->cpf = $request->input('cpf');
+                $responsavel->celular = $request->input('celular');
+                $responsavel->user_id = "";
+                $responsavel->save();
             }
 
-            $responsavel = new Pai();
-            $responsavel->nome = $request->input('nome_responsavel');
-            $responsavel->grau_parentesco = $request->input('grau_parentesco');
-            $responsavel->data_nasc = \Carbon\Carbon::parse($request->input('data_nasc_responsavel'));
-            $responsavel->ci = $request->input('ci');
-            $responsavel->cpf = $request->input('cpf');
-            $responsavel->celular = $request->input('celular');
-            $responsavel->user_id = $user->id;
-            $responsavel->save();
-            
             $aluno->pai()->attach($responsavel);
         }
         return response(200);

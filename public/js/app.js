@@ -2003,14 +2003,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/turmas?page=' + page).then(function (response) {
+      axios.get('/listaturmas?page=' + page).then(function (response) {
         _this2.lista_turmas = response.data;
       });
     },
     loadAnosLetivos: function loadAnosLetivos() {
       var _this = this;
 
-      axios.get('/api/anoletivo').then(function (response) {
+      axios.get('/anoletivo').then(function (response) {
         // Sucesso
         _this.lista_anos = response.data;
       })["catch"](function (error) {
@@ -2032,7 +2032,7 @@ __webpack_require__.r(__webpack_exports__);
           'content-type': 'application/json'
         }
       };
-      axios.post('/api/novaturma', this.turma, config).then(function (response) {
+      axios.post('/novaturma', this.turma, config).then(function (response) {
         currentObj.success = response.data.success;
         Swal.fire({
           position: 'center',
@@ -2067,7 +2067,7 @@ __webpack_require__.r(__webpack_exports__);
       this.turma.hora_saida = '';
     },
     removerTurma: function removerTurma(id) {
-      axios["delete"]('/api/turmas/' + id).then(function (response) {
+      axios["delete"]('/turmas/' + id).then(function (response) {
         Swal.fire({
           position: 'center',
           type: 'success',
@@ -2204,7 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/usuarios?page=' + page).then(function (response) {
+      axios.get('/listausuarios?page=' + page).then(function (response) {
         _this.lista_usuarios = response.data;
       });
     },
@@ -2216,7 +2216,7 @@ __webpack_require__.r(__webpack_exports__);
           'content-type': 'application/json'
         }
       };
-      axios.post('/api/novousuario', this.usuario, config).then(function (response) {
+      axios.post('/novousuario', this.usuario, config).then(function (response) {
         currentObj.success = response.data.success;
         Swal.fire({
           position: 'center',
@@ -2243,7 +2243,7 @@ __webpack_require__.r(__webpack_exports__);
       $('body').removeClass('modal-open');
     },
     removerUsuario: function removerUsuario(id) {
-      axios["delete"]('/api/usuario/' + id).then(function (response) {
+      axios["delete"]('/usuario/' + id).then(function (response) {
         Swal.fire({
           position: 'center',
           type: 'success',
@@ -2350,14 +2350,14 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/alunos?page=' + page).then(function (response) {
+      axios.get('/listaalunos?page=' + page).then(function (response) {
         _this2.alunos = response.data;
       });
     },
     loadAlunos: function loadAlunos() {
       var _this = this;
 
-      axios.get('/api/alunos').then(function (response) {
+      axios.get('/listaalunos').then(function (response) {
         // Sucesso
         _this.alunos = response.data;
       })["catch"](function (error) {
@@ -2372,7 +2372,7 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
       });
     },
     removerAluno: function removerAluno(id) {
-      axios["delete"]('/api/aluno/' + id).then(function (response) {
+      axios["delete"]('/aluno/' + id).then(function (response) {
         Swal.fire({
           position: 'center',
           type: 'success',
@@ -2463,14 +2463,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/funcionarios/removidos?page=' + page).then(function (response) {
+      axios.get('/funcionarios/removidos?page=' + page).then(function (response) {
         _this2.func = response.data;
       });
     },
     loadFunc: function loadFunc() {
       var _this = this;
 
-      axios.get('/api/funcionarios/removidos').then(function (response) {
+      axios.get('/funcionarios/removidos').then(function (response) {
         // Sucesso
         _this.func = response.data;
       })["catch"](function (error) {
@@ -2485,7 +2485,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     removerFuncionario: function removerFuncionario(id) {
-      axios["delete"]('/api/funcionarios/excluir/' + id).then(function (response) {
+      axios["delete"]('/funcionarios/excluir/' + id).then(function (response) {
         Swal.fire({
           position: 'center',
           type: 'success',
@@ -2505,7 +2505,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.loadFunc();
     },
     restaurarFuncionario: function restaurarFuncionario(id) {
-      axios.post('/api/funcionarios/restaurar/' + id).then(function (response) {
+      axios.post('/funcionarios/restaurar/' + id).then(function (response) {
         var _Swal$fire;
 
         Swal.fire((_Swal$fire = {
@@ -2765,7 +2765,7 @@ __webpack_require__.r(__webpack_exports__);
       formData.append('ci', this.ci);
       formData.append('email', this.email);
       console.log(formData);
-      axios.post('/api/aluno/novo', formData, config).then(function (response) {
+      axios.post('/aluno/cadastrar', formData, config).then(function (response) {
         currentObj.success = response.data.success;
         Swal.fire({
           position: 'center',
@@ -3008,12 +3008,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3029,14 +3023,21 @@ __webpack_require__.r(__webpack_exports__);
         ano_letivo: '',
         hora_entrada: '',
         hora_saida: ''
-      }
+      },
+      acesso_cameras: '',
+      titulo_rotina: '',
+      arquivo_rotina: '',
+      ensino_rotina: '',
+      titulo_cardapio: '',
+      arquivo_cardapio: '',
+      ensino_cardapio: ''
     };
   },
   methods: {
     loadAnoAtual: function loadAnoAtual() {
       var _this = this;
 
-      axios.get('/api/anoatual').then(function (response) {
+      axios.get('/anoatual').then(function (response) {
         // Sucesso
         _this.anoLetivo = response.data.ano;
       })["catch"](function (error) {
@@ -3053,7 +3054,7 @@ __webpack_require__.r(__webpack_exports__);
     novoAno: function novoAno() {
       var _this = this;
 
-      axios.get('/api/novoano').then(function (response) {
+      axios.get('/novoano').then(function (response) {
         // Sucesso
         Swal.fire({
           position: 'center',
@@ -3062,17 +3063,13 @@ __webpack_require__.r(__webpack_exports__);
           showConfirmButton: false,
           timer: 1500
         });
-      })["catch"](function (error) {
-        // Se tiver erros
-        console.log(error);
-      }).then(function () {// Executar algo
       });
       this.loadAnoAtual();
     },
     loadAnosLetivos: function loadAnosLetivos() {
       var _this = this;
 
-      axios.get('/api/anoletivo').then(function (response) {
+      axios.get('/anoletivo').then(function (response) {
         // Sucesso
         _this.lista_anos = response.data;
       })["catch"](function (error) {
@@ -3089,7 +3086,7 @@ __webpack_require__.r(__webpack_exports__);
     loadQtdUsuarios: function loadQtdUsuarios() {
       var _this = this;
 
-      axios.get('/api/qtdusuarios').then(function (response) {
+      axios.get('/qtdusuarios').then(function (response) {
         // Sucesso
         _this.qtdUsuarios = response.data;
       });
@@ -3097,7 +3094,7 @@ __webpack_require__.r(__webpack_exports__);
     loadQtdProfessores: function loadQtdProfessores() {
       var _this = this;
 
-      axios.get('/api/qtdprofs').then(function (response) {
+      axios.get('/qtdprofs').then(function (response) {
         // Sucesso
         _this.qtdProfessores = response.data;
       });
@@ -3106,8 +3103,115 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/turmas?page=' + page).then(function (response) {
+      axios.get('/listaturmas?page=' + page).then(function (response) {
         _this2.lista_turmas = response.data;
+      });
+    },
+    arqAcesso: function arqAcesso(e) {
+      console.log(e.target.files[0]); //Mostra as informações do arquivo
+
+      this.acesso_cameras = e.target.files[0];
+    },
+    selectArquivo: function selectArquivo(e) {
+      this.arquivo_rotina = e.target.files[0];
+    },
+    selectArquivoCardapio: function selectArquivoCardapio(e) {
+      this.arquivo_cardapio = e.target.files[0];
+    },
+    formCameras: function formCameras(e) {
+      e.preventDefault();
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('acesso_cameras', this.acesso_cameras);
+      axios.post('/acessocameras', formData, config).then(function (response) {
+        currentObj.success = response.data.success;
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Arquivo enviado com sucesso.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })["catch"](function (error) {
+        currentObj.output = error;
+        Swal.fire({
+          position: 'center',
+          type: 'error',
+          title: 'Erro ao enviar o arquivo. Certifique-se que é um arquivo pdf válido.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      });
+    },
+    formRotina: function formRotina(e) {
+      e.preventDefault();
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('titulo', this.titulo_rotina);
+      formData.append('arquivo', this.arquivo_rotina);
+      formData.append('ensino', this.ensino_rotina);
+      console.log(formData);
+      axios.post('api/novarotina', formData, config).then(function (response) {
+        currentObj.success = response.data.success;
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Arquivo enviado com sucesso.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })["catch"](function (error) {
+        currentObj.output = error;
+        Swal.fire({
+          position: 'center',
+          type: 'error',
+          title: 'Erro ao enviar o arquivo. Certifique-se que é um arquivo pdf válido.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      });
+    },
+    formCardapio: function formCardapio(e) {
+      e.preventDefault();
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('titulo_cardapio', this.titulo_cardapio);
+      formData.append('arquivo_cardapio', this.arquivo_cardapio);
+      formData.append('ensino_cardapio', this.ensino_cardapio);
+      console.log(formData);
+      axios.post('api/cardapio', formData, config).then(function (response) {
+        currentObj.success = response.data.success;
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Arquivo enviado com sucesso.',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })["catch"](function (error) {
+        currentObj.output = error;
+        Swal.fire({
+          position: 'center',
+          type: 'error',
+          title: 'Erro ao enviar o arquivo. Certifique-se que é um arquivo pdf válido.',
+          showConfirmButton: false,
+          timer: 1500
+        });
       });
     }
   },
@@ -3272,14 +3376,14 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/funcionarios?page=' + page).then(function (response) {
+      axios.get('/funcionarios?page=' + page).then(function (response) {
         _this2.funcionarios = response.data;
       });
     },
     loadFuncionarios: function loadFuncionarios() {
       var _this = this;
 
-      axios.get('/api/funcionarios').then(function (response) {
+      axios.get('/listafuncionarios').then(function (response) {
         // Sucesso
         _this.funcionarios = response.data;
       })["catch"](function (error) {
@@ -3294,7 +3398,7 @@ Vue.use(__webpack_require__(/*! vue-moment */ "./node_modules/vue-moment/dist/vu
       });
     },
     removerFuncionario: function removerFuncionario(id) {
-      axios["delete"]('/api/funcionarios/' + id).then(function (response) {
+      axios["delete"]('/funcionarios/' + id).then(function (response) {
         Swal.fire({
           position: 'center',
           type: 'success',
@@ -3385,14 +3489,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/funcionarios/removidos?page=' + page).then(function (response) {
+      axios.get('/funcionarios/removidos?page=' + page).then(function (response) {
         _this2.func = response.data;
       });
     },
     loadFunc: function loadFunc() {
       var _this = this;
 
-      axios.get('/api/funcionarios/removidos').then(function (response) {
+      axios.get('/listafuncionarios/removidos').then(function (response) {
         // Sucesso
         _this.func = response.data;
       })["catch"](function (error) {
@@ -3407,7 +3511,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     removerFuncionario: function removerFuncionario(id) {
-      axios["delete"]('/api/funcionarios/excluir/' + id).then(function (response) {
+      axios["delete"]('/funcionarios/excluir/' + id).then(function (response) {
         Swal.fire({
           position: 'center',
           type: 'success',
@@ -3427,7 +3531,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.loadFunc();
     },
     restaurarFuncionario: function restaurarFuncionario(id) {
-      axios.post('/api/funcionarios/restaurar/' + id).then(function (response) {
+      axios.post('/funcionarios/restaurar/' + id).then(function (response) {
         var _Swal$fire;
 
         Swal.fire((_Swal$fire = {
@@ -3746,7 +3850,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append('email', this.email);
       formData.append('nivel_acesso', this.nivel_acesso);
       formData.append('senha', this.senha);
-      axios.post('/api/funcionario/novo', formData, config).then(function (response) {
+      axios.post('/funcionario/novo', formData, config).then(function (response) {
         var _Swal$fire;
 
         currentObj.success = response.data.success;
@@ -45183,10 +45287,278 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(6),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "box box-success collapsed-box" }, [
+          _vm._m(6),
+          _vm._v(" "),
+          _c("div", { staticClass: "box-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: { submit: _vm.formCameras }
+              },
+              [
+                _c("div", { staticClass: "panel-body" }, [
+                  _c("div", { staticClass: "form-group col-sm-12" }, [
+                    _c("label", [_vm._v("Selecionar:")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control-file",
+                      attrs: {
+                        type: "file",
+                        id: "acesso_cameras",
+                        name: "acesso_cameras",
+                        required: ""
+                      },
+                      on: { change: _vm.arqAcesso }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(7)
+                ])
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "box box-success collapsed-box" }, [
+          _vm._m(8),
+          _vm._v(" "),
+          _c("div", { staticClass: "box-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: { submit: _vm.formRotina }
+              },
+              [
+                _c("div", { staticClass: "panel-body" }, [
+                  _c("div", { staticClass: "form-group col-sm-12 col-md-12" }, [
+                    _c("label", { attrs: { for: "titulo" } }, [
+                      _vm._v("Nome:")
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.titulo_rotina,
+                          expression: "titulo_rotina"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "titulo",
+                        id: "titulo",
+                        required: ""
+                      },
+                      domProps: { value: _vm.titulo_rotina },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.titulo_rotina = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-sm-12 col-md-12" }, [
+                    _c("label", { attrs: { for: "arquivo" } }, [
+                      _vm._v("Arquivo:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control-file",
+                      attrs: {
+                        type: "file",
+                        id: "arquivo",
+                        name: "arquivo",
+                        required: ""
+                      },
+                      on: { change: _vm.selectArquivoCardapio }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-sm-12 col-md-12" }, [
+                    _c("label", [_vm._v("Ensino:")]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.ensino_rotina,
+                            expression: "ensino_rotina"
+                          }
+                        ],
+                        attrs: { name: "ensino", id: "ensino", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.ensino_rotina = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("Bercário")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("Infantil")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(9)
+                ])
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "box box-success collapsed-box" }, [
+          _vm._m(10),
+          _vm._v(" "),
+          _c("div", { staticClass: "box-body" }, [
+            _c(
+              "form",
+              {
+                attrs: { enctype: "multipart/form-data" },
+                on: { submit: _vm.formCardapio }
+              },
+              [
+                _c("div", { staticClass: "panel-body" }, [
+                  _c("div", { staticClass: "form-group col-sm-12 col-md-12" }, [
+                    _c("label", { attrs: { for: "titulo" } }, [
+                      _vm._v("Nome:")
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.titulo_cardapio,
+                          expression: "titulo_cardapio"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "titulo",
+                        id: "titulo",
+                        required: ""
+                      },
+                      domProps: { value: _vm.titulo_cardapio },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.titulo_cardapio = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-sm-12 col-md-12" }, [
+                    _c("label", { attrs: { for: "arquivo" } }, [
+                      _vm._v("Arquivo:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control-file",
+                      attrs: {
+                        type: "file",
+                        id: "arquivo",
+                        name: "arquivo",
+                        required: ""
+                      },
+                      on: { change: _vm.selectArquivo }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group col-sm-12 col-md-12" }, [
+                    _c("label", [_vm._v("Ensino:")]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.ensino_cardapio,
+                            expression: "ensino_cardapio"
+                          }
+                        ],
+                        attrs: { name: "ensino", id: "ensino", required: "" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.ensino_cardapio = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("Bercário")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("Infantil")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(11)
+                ])
+              ]
+            )
+          ])
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "box box-primary" }, [
-      _vm._m(7),
+      _vm._m(12),
       _vm._v(" "),
       _c("div", { staticClass: "box-body" }, [
         _c(
@@ -45313,244 +45685,97 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "box box-success collapsed-box" }, [
-          _c(
-            "div",
-            {
-              staticClass: "box-header with-border",
-              attrs: { "data-widget": "collapse" }
-            },
-            [
-              _c("h3", { staticClass: "box-title" }, [
-                _c("i", {
-                  staticClass: "fa fa-video-camera",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" ACESSO CÂMERAS")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-tools pull-right" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-box-tool",
-                    attrs: { type: "button", "data-widget": "collapse" }
-                  },
-                  [_c("i", { staticClass: "fa fa-plus" })]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "box-body" }, [
-            _c(
-              "form",
-              {
-                attrs: { id: "arquivo-cameras", enctype: "multipart/form-data" }
-              },
-              [
-                _c("div", { staticClass: "panel-body" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("Selecionar:")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control-file",
-                      attrs: {
-                        type: "file",
-                        id: "acesso_cameras",
-                        name: "acesso_cameras",
-                        required: ""
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "button",
-                      { staticClass: "btn btn-primary btn-cameras" },
-                      [_vm._v("Enviar")]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ])
+    return _c(
+      "div",
+      {
+        staticClass: "box-header with-border",
+        attrs: { "data-widget": "collapse" }
+      },
+      [
+        _c("h3", { staticClass: "box-title" }, [
+          _c("i", {
+            staticClass: "fa fa-video",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" ACESSO CÂMERAS")
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "box box-success collapsed-box" }, [
-          _c(
-            "div",
-            {
-              staticClass: "box-header with-border",
-              attrs: { "data-widget": "collapse" }
-            },
-            [
-              _c("h3", { staticClass: "box-title" }, [
-                _c("i", {
-                  staticClass: "fa fa-calendar",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" ROTINA")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-tools pull-right" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-box-tool",
-                    attrs: { type: "button", "data-widget": "collapse" }
-                  },
-                  [_c("i", { staticClass: "fa fa-plus" })]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "box-body" }, [
-            _c("form", [
-              _c("div", { staticClass: "panel-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Selecionar:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control-file",
-                    attrs: {
-                      type: "file",
-                      id: "programacaoSemanal",
-                      name: "programacaoSemanal"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Turma:")]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      attrs: {
-                        name: "turmaProgramacao",
-                        id: "turmaProgramacao"
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "Berçario" } }, [
-                        _vm._v("Bercário")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Infantil" } }, [
-                        _vm._v("Infantil")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Enviar")]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "box box-success collapsed-box" }, [
-          _c(
-            "div",
-            {
-              staticClass: "box-header with-border",
-              attrs: { "data-widget": "collapse" }
-            },
-            [
-              _c("h3", { staticClass: "box-title" }, [
-                _c("i", {
-                  staticClass: "fa fa-calendar",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" CARDÁPIO")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "box-tools pull-right" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-box-tool",
-                    attrs: { type: "button", "data-widget": "collapse" }
-                  },
-                  [_c("i", { staticClass: "fa fa-plus" })]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "box-body" }, [
-            _c("form", [
-              _c("div", { staticClass: "panel-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Selecionar:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "form-control-file",
-                    attrs: {
-                      type: "file",
-                      id: "programacaoSemanal",
-                      name: "programacaoSemanal"
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Turma:")]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      attrs: {
-                        name: "turmaProgramacao",
-                        id: "turmaProgramacao"
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "Berçario" } }, [
-                        _vm._v("Bercário")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", { attrs: { value: "Infantil" } }, [
-                        _vm._v("Infantil")
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [_vm._v("Enviar")]
-                  )
-                ])
-              ])
-            ])
-          ])
-        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-sm-12" }, [
+      _c("button", { staticClass: "btn btn-primary btn-cameras" }, [
+        _vm._v("Enviar")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "box-header with-border",
+        attrs: { "data-widget": "collapse" }
+      },
+      [
+        _c("h3", { staticClass: "box-title" }, [
+          _c("i", {
+            staticClass: "fa fa-calendar",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" ROTINA")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-sm-12 col-md-2" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Enviar")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "box-header with-border",
+        attrs: { "data-widget": "collapse" }
+      },
+      [
+        _c("h3", { staticClass: "box-title" }, [
+          _c("i", {
+            staticClass: "fa fa-calendar",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" CARDÁPIO")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group col-sm-12 col-md-2" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Enviar")]
+      )
     ])
   },
   function() {
@@ -47474,24 +47699,6 @@ var staticRenderFns = [
               _c("i", { staticClass: "fa fa-list" }),
               _vm._v(" "),
               _c("span", [_vm._v("Ex-alunos")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "header" }, [_vm._v("FINANCEIRO")]),
-          _vm._v(" "),
-          _c("li", { staticClass: "treeview" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-plus" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Contas a receber")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "treeview" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-window-minimize" }),
-              _vm._v(" "),
-              _c("span", [_vm._v("Contas a pagar")])
             ])
           ]),
           _vm._v(" "),
