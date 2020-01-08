@@ -139,6 +139,14 @@ class AlunoController extends Controller
         }
         return response('Aluno não encontrado', 404);
     }
+    public function verAluno($matricula)
+    {
+        $aluno = Aluno::with('pai')->where('matricula','=', $matricula)->first();
+        if (isset($aluno)) {
+            return view('alunos.aluno_perfil',compact('aluno'));
+        }
+        return response('Aluno não encontrado', 404);
+    }
 
     /**
      * Show the form for editing the specified resource.

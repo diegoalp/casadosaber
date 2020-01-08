@@ -20,8 +20,6 @@ class CreateTurmasTable extends Migration
             $table->string('hora_saida');
             $table->string('turno');
             $table->string('ensino');
-            $table->unsignedBigInteger('ano_id');
-            $table->foreign('ano_id')->references('id')->on('ano_letivo');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -19,8 +19,8 @@
                             <img :src="'/imagens/alunos/'+ a.matricula + '/'+ a.foto" alt="Product Image">
                         </div>
                         <div class="product-info">
-                            <a href="javascript:void(0)" class="product-title">{{a.nome}}
-                                <span class="label label-warning pull-right">$1800</span></a>
+                            <a v-bind:href="'/aluno/'+a.matricula" class="product-title">{{a.nome}}</a>
+                            <a href="javascript:void(0);" class="pull-right badge bg-red" v-on:click='removerAluno(a.id)'>Remover</a>
                             <span class="product-description">
                                 {{a.matricula}}
                             </span>

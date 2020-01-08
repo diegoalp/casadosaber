@@ -10,7 +10,6 @@
                 <thead>
                 <tr role="row">
                     <th>Título</th>
-                    <th>Ano Letivo</th>
                     <th>Turno</th>
                     <th>Ensino</th>
                     <th>Hora de entrada</th>
@@ -20,7 +19,6 @@
                 <tbody>
                 <tr role="row" class="odd" v-for="turma in lista_turmas.data" :key="turma.id">
                   <td>{{turma.titulo}}</td>
-                  <td>{{turma.anoletivo.ano}}</td>
                   <td>{{ turma.turno }}</td>
                   <td>{{turma.ensino}}</td>
                   <td>{{ turma.hora_entrada }}</td>
@@ -59,7 +57,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-4">
+                                    <div class="col-sm-12 col-md-3">
                                         <label for="turma">Turno</label><br />
                                         <select class="form-control" id="turnoTurma" v-model="turma.turno" name="turnoTurma">
                                             <option value="Matutino">Matutino</option>
@@ -68,7 +66,7 @@
                                         </select>
                                     </div>
 
-                                    <div class="col-sm-12 col-md-4">
+                                    <div class="col-sm-12 col-md-3">
                                         <label for="turma">Série (Ensino)</label><br />
                                         <select class="form-control" v-model="turma.ensino" id="ensino" name='ensino'>
                                             <option value="Infantil">Infantil</option>
@@ -76,23 +74,12 @@
                                             <option value="Fundamental I">Fundamental II</option>
                                         </select>
                                     </div>
-
-                                    <div class="col-sm-12 col-md-4">
-                                        <label for="turma">Ano Letivo</label><br />
-                                        <select class="form-control" id="anoLetivo" v-model="turma.ano_letivo" name='anoLetivo'>
-                                            <option v-for="ano in lista_anos" v-bind:value="ano.id"> {{ ano.ano }} </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="turma">Hora de Entrada</label><br />
+                                    <div class="col-md-3">
+                                        <label for="turma">Horário de Entrada</label><br />
                                         <input type="time" class="form-control" v-model="turma.hora_entrada" name="horaEntrada" id="horaEntrada" />
                                     </div>
-                                    <div class="col-md-6">
-                                        <label for="turma">Hora de Saída</label><br />
+                                    <div class="col-md-3">
+                                        <label for="turma">Horário Saída</label><br />
                                         <input type="time" class="form-control" v-model="turma.hora_saida" name="horaSaida" id="horaSaida" />
                                     </div>
                                 </div>
@@ -120,7 +107,6 @@ export default {
                 titulo: '',
                 turno: '',
                 ensino: '',
-                ano_letivo: '',
                 hora_entrada: '',
                 hora_saida: '',
 

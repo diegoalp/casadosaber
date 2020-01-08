@@ -9,10 +9,10 @@ class AlunoPai extends Model
     protected $table = 'alunos_pais';
 
     public function aluno(){
-        return $this->hasOny('App\Aluno', 'id', 'aluno_id');
+        return $this->hasOne('App\Aluno', 'id', 'aluno_id');
     }
 
     public function pai(){
-        return $this->hasOny('App\Pai', 'id', 'pai_id');
+        return $this->hasOne('App\Pai', 'id', 'pai_id');
     }
 }

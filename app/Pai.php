@@ -10,8 +10,8 @@ class Pai extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    function pai(){
-        return $this->belongsToMany('App\Pai','alunos_pais', 'aluno_id', 'id');
+    function aluno(){
+        return $this->belongsToMany('App\AlunoPai','id','pai_id');
     }
 
     function usuario(){

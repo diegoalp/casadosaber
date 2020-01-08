@@ -10,14 +10,14 @@ class RotinaController extends Controller
 {
     public function store(Request $request)
     {
-        if($request->hasFile('arquivo_rotina') && $request->file('arquivo_rotina')->isValid()){
+        if($request->hasFile('arquivo') && $request->file('arquivo')->isValid()){
 
-            $ext = $request->arquivo_rotina->extension();
+            $ext = $request->arquivo->extension();
+            dd($ext);
             $nome = kebab_case($request->input('titulo'));
             $nomearquivo = str_pad($request->input('ensino') , 2 , '0' , STR_PAD_LEFT)."-".$nome.".".$ext;
-
             if($ext == "pdf") {
-                $upload = $request->arquivo_rotina->storeAs('rotinas/', $nomearquivo);
+                $upload = $request->arquivo->storeAs('rotinas', $nomearquivo);
 
                 $rotina = new Rotina();
                 $rotina->titulo = $request->input('titulo');
@@ -25,19 +25,14 @@ class RotinaController extends Controller
                 $rotina->ensino = $request->input('ensino');
                 $rotina->save();
 
-                return response()->json([
-                    'message'   => 'Arquivo enviado com sucesso',
-                ], 200);
+                return response(200);
             }else{
-                return response()->json([
-                    'message'   => 'Formato não permitido. Envie um arquivo .pdf',
-                ], 500);
+                return response(400);
             }
 
         }else{
-            return response()->json([
-                'message'   => 'Formato não permitido. Envie um arquivo .pdf',
-            ], 500);
+            dd($request->arquivo_rotina->extension());
+            return response(500, 'Não é um formato válido.');
         }
     }
 }

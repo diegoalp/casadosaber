@@ -21,6 +21,7 @@ Route::get('/funcionario/novo', 'HomeController@addFuncionario')->name('addfunc'
 Route::get('/funcionarios/removidos', 'HomeController@funcionariosRemovidos')->name('funcremovidos');
 Route::get('/aluno/novo', 'HomeController@addAluno')->name('addaluno');
 Route::get('/alunos', 'HomeController@alunos')->name('alunos');
+Route::get('/aluno/{matricula}', 'AlunoController@verAluno');
 
 //Rotas admin
 Route::get('/novoano','AnoLetivoController@create');
@@ -53,6 +54,9 @@ Route::delete('/aluno/{id}', 'AlunoController@destroy');
 Route::get('/alunos/removidos', 'AlunoController@trashes');
 Route::delete('/aluno/excluir/{id}', 'AlunoController@forceDestroy');
 Route::post('/aluno/restaurar/{id}', 'AlunoController@restaurar');
+Route::get('/responsaveis/{id}','PaiController@responsaveis');
 
-Route::post('/acessocameras', 'AcessoCameraController@store')->name('acesso_cameras');
-Route::post('/novarotina', 'RotinaController@store')->name('nova_rotina');
+Route::post('/arquivo/cameras', 'AcessoCameraController@store')->name('acesso_cameras');
+Route::post('/arquivo/rotina', 'RotinaController@store')->name('nova_rotina');
+
+Route::get('/matricula/{id}','MatriculaController@matriculaAluno');

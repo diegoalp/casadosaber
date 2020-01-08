@@ -9,7 +9,7 @@ class TurmasController extends Controller
 {
     public function indexJson()
     {
-        $turma = Turma::with("anoletivo")->orderBy('ano_id', 'desc')->paginate(10);
+        $turma = Turma::orderBy('titulo', 'asc')->paginate(10);
         return json_encode($turma);
     }
     public function turmasAnoAtual()

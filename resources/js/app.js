@@ -36,6 +36,8 @@ Vue.component('funcionarios_removidos-component', require('./components/funciona
 Vue.component('novoaluno-component', require('./components/alunos/NovoAlunoComponent.vue').default);
 Vue.component('alunos-component', require('./components/alunos/AlunosComponent.vue').default);
 Vue.component('alunos_removidos-component', require('./components/alunos/AlunosRemovidosComponent.vue').default);
+Vue.component('alunos_responsaveis-component', require('./components/alunos/AlunosResponsaveisComponent.vue').default);
+Vue.component('matricula_aluno-component', require('./components/alunos/MatriculaAlunoComponent.vue').default);
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 /**

@@ -1,6 +1,9 @@
 .modal{
     z-index: 999999 !important;
-}
-.modal-backdrop{
+}.modal-backdrop{
     z-index: 99;
+}.box-purple{
+    border-top-color: #EE82EE !important;
+}.box-primary{
+    border-top-color: #00BFFF !important;
 }

@@ -10,8 +10,8 @@ class Turma extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
 
-    public function anoletivo()
+    public function alunos()
     {
-        return $this->hasOne('App\AnoLetivo','id', 'ano_id');
+        return $this->hasMany('App\Matricula','id', 'ano_id');
     }
 }

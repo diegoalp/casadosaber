@@ -10,7 +10,7 @@
                     <p>Alunos Matriculados</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="ion ion-person"></i>
                 </div>
                 <a href="#" class="small-box-footer">Listar <i class="fa fa-arrow-circle-right"></i></a>
             </div>
@@ -186,7 +186,6 @@
             <ul class="todo-list ui-sortable">
                 <li v-for="turma in lista_turmas.data" :key="turma.id"> 
                     <span class="text"><strong>{{ turma.titulo }}</strong></span>
-                    <span class="label label-primary">{{ turma.anoletivo.ano }}</span>
                     <span class="label label-success">{{ turma.ensino }}</span>
                     <span class="label label-warning">{{ turma.turno }}</span>
                 </li>
@@ -218,7 +217,6 @@ export default {
                 titulo: '',
                 turno: '',
                 ensino: '',
-                ano_letivo: '',
                 hora_entrada: '',
                 hora_saida: '',
 
@@ -330,7 +328,7 @@ export default {
                 let formData = new FormData();
                 formData.append('acesso_cameras', this.acesso_cameras);
 
-                axios.post('/acessocameras', formData, config)
+                axios.post('/arquivo/cameras', formData, config)
                     .then(function (response){
                         currentObj.success = response.data.success;
                         Swal.fire({
@@ -369,7 +367,7 @@ export default {
 
                 console.log(formData);
 
-                axios.post('api/novarotina', formData, config)
+                axios.post('/arquivo/rotina', formData, config)
                     .then(function (response){
                         currentObj.success = response.data.success;
                         Swal.fire({
@@ -406,7 +404,7 @@ export default {
                 formData.append('ensino_cardapio', this.ensino_cardapio);
                 console.log(formData);
 
-                axios.post('api/cardapio', formData, config)
+                axios.post('/cardapio', formData, config)
                     .then(function (response){
                         currentObj.success = response.data.success;
                         Swal.fire({
