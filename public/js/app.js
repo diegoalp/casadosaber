@@ -2582,6 +2582,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-the-mask */ "./node_modules/vue-the-mask/dist/vue-the-mask.js");
+/* harmony import */ var vue_the_mask__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_the_mask__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! v-money */ "./node_modules/v-money/dist/v-money.js");
+/* harmony import */ var v_money__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(v_money__WEBPACK_IMPORTED_MODULE_1__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2592,11 +2598,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    TheMask: vue_the_mask__WEBPACK_IMPORTED_MODULE_0__["TheMask"],
+    Money: v_money__WEBPACK_IMPORTED_MODULE_1__["Money"]
+  },
   props: ['id'],
   data: function data() {
     return {
-      matricula: []
+      matricula: [],
+      addMatricula: {
+        turma: '',
+        mensalidade: '',
+        bolsista: '',
+        educamais: ''
+      },
+      lista_turmas: {},
+      money: {
+        decimal: ',',
+        thousands: '.',
+        prefix: 'R$ ',
+        precision: 2,
+        masked: false
+      }
     };
   },
   methods: {
@@ -2616,10 +2703,58 @@ __webpack_require__.r(__webpack_exports__);
           timer: 1500
         });
       });
+    },
+    loadTurmas: function loadTurmas() {
+      var _this2 = this;
+
+      axios.get('/todasturmas').then(function (response) {
+        _this2.lista_turmas = response.data;
+      });
+    },
+    formMatricula: function formMatricula(e) {
+      e.preventDefault();
+      var currentObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      var formData = new FormData();
+      formData.append('turma', this.turma);
+      formData.append('mensalidade', this.mensalidade);
+      formData.append('bolsista', this.bolsista);
+      formData.append('educamais', this.educamais);
+      formData.append('aluno', this.id);
+      axios.post('/efetuarmatricula', formData, config).then(function (response) {
+        var _Swal$fire;
+
+        currentObj.success = response.data.success;
+        Swal.fire((_Swal$fire = {
+          position: 'center',
+          title: 'Sucesso',
+          type: 'success'
+        }, _defineProperty(_Swal$fire, "title", 'Aluno matriculado com sucesso.'), _defineProperty(_Swal$fire, "showConfirmButton", false), _defineProperty(_Swal$fire, "timer", 1500), _Swal$fire));
+      })["catch"](function (error) {
+        var _Swal$fire2;
+
+        currentObj.output = error;
+        Swal.fire((_Swal$fire2 = {
+          position: 'center',
+          title: 'Ops',
+          type: 'error'
+        }, _defineProperty(_Swal$fire2, "title", 'Erro ao efetuar matrícula deste aluno.'), _defineProperty(_Swal$fire2, "showConfirmButton", false), _defineProperty(_Swal$fire2, "timer", 1500), _Swal$fire2));
+      });
+      this.getMatricula();
+      $('#modalMatricula').removeClass('in');
+      $('#modalMatricula').attr("aria-hidden", "true");
+      $('#modalMatricula').css("display", "none");
+      $('.modal-backdrop').remove();
+      $('body').removeClass('modal-open');
     }
   },
   mounted: function mounted() {
     this.getMatricula();
+    this.loadTurmas();
   }
 });
 
@@ -2867,7 +3002,6 @@ __webpack_require__.r(__webpack_exports__);
           showConfirmButton: false,
           timer: 1500
         });
-        this.input;
       })["catch"](function (error) {
         currentObj.output = error;
         Swal.fire({
@@ -44472,7 +44606,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm.matricula
+    _vm.matricula.length
       ? _c(
           "span",
           _vm._l(_vm.matricula, function(m) {
@@ -44482,7 +44616,289 @@ var render = function() {
           }),
           0
         )
-      : _c("span", [_vm._m(0)])
+      : _c("span", [_vm._m(0)]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "modalMatricula",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "modalMatriculaLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("form", { on: { submit: _vm.formMatricula } }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "form-group col-md-3" }, [
+                      _c("label", { attrs: { for: "turma" } }, [
+                        _vm._v("Turma")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.turma,
+                              expression: "turma"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "turma" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.turma = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.lista_turmas, function(t) {
+                          return _c(
+                            "option",
+                            { key: t.id, domProps: { value: t.id } },
+                            [_vm._v(_vm._s(t.titulo) + " ")]
+                          )
+                        }),
+                        0
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-md-3" }, [
+                      _c("label", { attrs: { for: "mensalidade" } }, [
+                        _vm._v("Mensalidade")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.mensalidade,
+                            expression: "mensalidade"
+                          },
+                          {
+                            name: "money",
+                            rawName: "v-money",
+                            value: _vm.money,
+                            expression: "money"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "mensalidade" },
+                        domProps: { value: _vm.mensalidade },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.mensalidade = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-md-3" }, [
+                      _c("label", { attrs: { for: "educamais" } }, [
+                        _vm._v("EducaMais?")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-check" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.educamais,
+                              expression: "educamais"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: {
+                            type: "radio",
+                            name: "educamais",
+                            id: "educamais1",
+                            value: "1",
+                            checked: ""
+                          },
+                          domProps: { checked: _vm._q(_vm.educamais, "1") },
+                          on: {
+                            change: function($event) {
+                              _vm.educamais = "1"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "educamais1" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Sim\n                                        "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-check" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.educamais,
+                              expression: "educamais"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: {
+                            type: "radio",
+                            name: "educamais",
+                            id: "educamais2",
+                            value: "0"
+                          },
+                          domProps: { checked: _vm._q(_vm.educamais, "0") },
+                          on: {
+                            change: function($event) {
+                              _vm.educamais = "0"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "educamais2" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Não\n                                        "
+                            )
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group col-md-3" }, [
+                      _c("label", { attrs: { for: "bolsista" } }, [
+                        _vm._v("Bolsista?")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-check" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.bolsista,
+                              expression: "bolsista"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: {
+                            type: "radio",
+                            name: "bolsista",
+                            id: "bolsista1",
+                            value: "1",
+                            checked: ""
+                          },
+                          domProps: { checked: _vm._q(_vm.bolsista, "1") },
+                          on: {
+                            change: function($event) {
+                              _vm.bolsista = "1"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "bolsista1" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Sim\n                                        "
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-check" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.bolsista,
+                              expression: "bolsista"
+                            }
+                          ],
+                          staticClass: "form-check-input",
+                          attrs: {
+                            type: "radio",
+                            name: "bolsista",
+                            id: "bolsista2",
+                            value: "0"
+                          },
+                          domProps: { checked: _vm._q(_vm.bolsista, "0") },
+                          on: {
+                            change: function($event) {
+                              _vm.bolsista = "0"
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "form-check-label",
+                            attrs: { for: "bolsista2" }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            Não\n                                        "
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ])
+            ])
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -44491,9 +44907,51 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "text-center" }, [
-      _c("a", { staticClass: "btn btn-success", attrs: { href: "#" } }, [
-        _c("b", [_vm._v("Matricular")])
-      ])
+      _c(
+        "a",
+        {
+          staticClass: "btn btn-success",
+          attrs: {
+            href: "",
+            "data-toggle": "modal",
+            "data-target": "#modalMatricula"
+          }
+        },
+        [_c("b", [_vm._v("Matricular")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h3",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Matrícula")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Fechar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("Confirmar")]
+      )
     ])
   }
 ]

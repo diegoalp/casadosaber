@@ -12,6 +12,11 @@ class TurmasController extends Controller
         $turma = Turma::orderBy('titulo', 'asc')->paginate(10);
         return json_encode($turma);
     }
+    public function listaTurmas()
+    {
+        $turma = Turma::orderBy('titulo', 'asc')->get();
+        return json_encode($turma);
+    }
     public function turmasAnoAtual()
     {
         $ano = \App\AnoLetivo::orderBy('id', 'desc')->first();
@@ -26,7 +31,6 @@ class TurmasController extends Controller
         $turma->hora_saida = $request->input('hora_saida');
         $turma->turno = $request->input('turno');
         $turma->ensino = $request->input('ensino');
-        $turma->ano_id = $request->input('ano_letivo');
         $turma->save();
 
         return response('OK', 200);

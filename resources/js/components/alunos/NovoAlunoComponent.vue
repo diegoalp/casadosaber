@@ -231,7 +231,6 @@
                         showConfirmButton: false,
                         timer: 1500
                     })
-                        this.input
                     })
                     .catch(function (error) {
 

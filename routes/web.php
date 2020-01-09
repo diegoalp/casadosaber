@@ -12,7 +12,7 @@
 */
 
 Auth::routes();
-
+Route::middleware(['auth'])->group(function () {
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/turmas', 'HomeController@turmas')->name('turmas');
 Route::get('/usuarios', 'HomeController@usuarios')->name('usuarios');
@@ -32,6 +32,7 @@ Route::get('/listausuarios', 'UserController@indexJson');
 Route::get('/qtdusuarios', 'UserController@countUsers');
 
 Route::get('/listaturmas', 'TurmasController@indexJson');
+Route::get('/todasturmas', 'TurmasController@listaTurmas');
 Route::post('/novaturma', 'TurmasController@store');
 Route::delete('/turmas/{id}', 'TurmasController@destroy');
 
@@ -60,3 +61,5 @@ Route::post('/arquivo/cameras', 'AcessoCameraController@store')->name('acesso_ca
 Route::post('/arquivo/rotina', 'RotinaController@store')->name('nova_rotina');
 
 Route::get('/matricula/{id}','MatriculaController@matriculaAluno');
+Route::post('/efetuarmatricula','MatriculaController@store');
+});

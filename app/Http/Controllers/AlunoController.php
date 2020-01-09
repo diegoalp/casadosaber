@@ -48,7 +48,7 @@ class AlunoController extends Controller
      */
     public function store(Request $request)
     {
-        $responsavel = Pai::where('cpf', '=', '%'.$request->input('cpf').'%')->get()->first();
+        $responsavel = Pai::where('cpf', '=', $request->input('cpf'))->first();
         $qtdAlunos = Aluno::withTrashed()->count() + 1;
         $dataAtual = new Carbon();
         $data = $dataAtual->format('Y');
@@ -69,22 +69,21 @@ class AlunoController extends Controller
             $nomeimagem = "sem_foto.png";
         }
 
-        $aluno = new Aluno();
-        $aluno->nome = $request->input('nome');
-        $aluno->matricula = $matricula;
-        $aluno->foto = $nomeimagem;
-        $aluno->data_nasc = \Carbon\Carbon::parse($request->input('data_nasc'))->format('Y/m/d');
-        $aluno->nacionalidade = $request->input('nacionalidade');
-        $aluno->endereco = $request->input('endereco');
-        $aluno->bairro = $request->input('bairro');
-        $aluno->cidade = $request->input('cidade');
-        $aluno->estado = $request->input('estado');
-        $aluno->cep = $request->input('cep');
-        $aluno->sexo = $request->input('sexo');
-        $aluno->tipo_sanguineo = $request->input('tipo_sanguineo');
-        $aluno->save();
-
         if($responsavel){
+            $aluno = new Aluno();
+            $aluno->nome = $request->input('nome');
+            $aluno->matricula = $matricula;
+            $aluno->foto = $nomeimagem;
+            $aluno->data_nasc = \Carbon\Carbon::parse($request->input('data_nasc'))->format('Y/m/d');
+            $aluno->nacionalidade = $request->input('nacionalidade');
+            $aluno->endereco = $request->input('endereco');
+            $aluno->bairro = $request->input('bairro');
+            $aluno->cidade = $request->input('cidade');
+            $aluno->estado = $request->input('estado');
+            $aluno->cep = $request->input('cep');
+            $aluno->sexo = $request->input('sexo');
+            $aluno->tipo_sanguineo = $request->input('tipo_sanguineo');
+            $aluno->save();
             $aluno->pai()->attach($responsavel);
         }else{
             if($request->input('grau_parentesco') === "Pai" || $request->input('grau_parentesco') === "Mãe"){
@@ -109,7 +108,6 @@ class AlunoController extends Controller
                 $responsavel->save();
 
             }else{
-                dd('Chegou aqui!');
                 $responsavel = new Pai();
                 $responsavel->nome = $request->input('nome_responsavel');
                 $responsavel->grau_parentesco = $request->input('grau_parentesco');
@@ -120,6 +118,20 @@ class AlunoController extends Controller
                 $responsavel->user_id = "";
                 $responsavel->save();
             }
+                $aluno = new Aluno();
+                $aluno->nome = $request->input('nome');
+                $aluno->matricula = $matricula;
+                $aluno->foto = $nomeimagem;
+                $aluno->data_nasc = \Carbon\Carbon::parse($request->input('data_nasc'))->format('Y/m/d');
+                $aluno->nacionalidade = $request->input('nacionalidade');
+                $aluno->endereco = $request->input('endereco');
+                $aluno->bairro = $request->input('bairro');
+                $aluno->cidade = $request->input('cidade');
+                $aluno->estado = $request->input('estado');
+                $aluno->cep = $request->input('cep');
+                $aluno->sexo = $request->input('sexo');
+                $aluno->tipo_sanguineo = $request->input('tipo_sanguineo');
+                $aluno->save();
 
             $aluno->pai()->attach($responsavel);
         }
