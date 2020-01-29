@@ -9,17 +9,17 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="/vendor/adminlte/vendor/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/font-awesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="/vendor/adminlte/vendor/font-awesome/css/all.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="/vendor/adminlte/vendor/Ionicons/css/ionicons.min.css">
 
     @include('adminlte::plugins', ['type' => 'css'])
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/vendor/adminlte/dist/css/AdminLTE.min.css">
 
     @yield('adminlte_css')
 
@@ -35,9 +35,9 @@
 
 @yield('body')
 
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
-<script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="/vendor/adminlte/vendor/jquery/dist/jquery.min.js"></script>
+<script src="/vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
+<script src="/vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
 @include('adminlte::plugins', ['type' => 'js'])
 
