@@ -284,6 +284,9 @@
                             showConfirmButton: false,
                             timer: 1500
                         })
+                        .then(function() {
+                                    window.location.href = "/funcionarios";
+                                })
                     })
                     .catch(function (error) {
 
