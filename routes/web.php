@@ -17,6 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/turmas', 'HomeController@turmas')->name('turmas');
 Route::get('/usuarios', 'HomeController@usuarios')->name('usuarios');
 Route::get('/funcionarios', 'HomeController@funcionarios')->name('funcionarios');
+Route::get('/professores', 'HomeController@professores')->name('professores');
 Route::get('/funcionario/novo', 'HomeController@addFuncionario')->name('addfunc');
 Route::get('/funcionarios/removidos', 'HomeController@funcionariosRemovidos')->name('funcremovidos');
 Route::get('/aluno/novo', 'HomeController@addAluno')->name('addaluno');
@@ -41,6 +42,7 @@ Route::delete('/usuario/{id}', 'UserController@destroy');
 
 Route::post('/funcionario/novo', 'FuncionarioController@store');
 Route::get('/listafuncionarios', 'FuncionarioController@index');
+Route::get('/listafuncionarios/professores', 'FuncionarioController@indexProfessores');
 Route::get('/contagemfuncionarios', 'FuncionarioController@count');
 Route::delete('/funcionarios/{id}', 'FuncionarioController@destroy');
 Route::get('/listafuncionarios/removidos', 'FuncionarioController@trashes');

@@ -15,6 +15,11 @@ class FuncionarioController extends Controller
         $funcionario = Funcionario::orderBy('id', 'DESC')->paginate(12);
         return json_encode($funcionario);
     }
+    public function indexProfessores()
+    {
+        $funcionario = Funcionario::where('cargo','Professor')->orderBy('id', 'DESC')->paginate(12);
+        return json_encode($funcionario);
+    }
     public function count()
     {
         $funcionario = Funcionario::orderBy('id', 'DESC')->get();

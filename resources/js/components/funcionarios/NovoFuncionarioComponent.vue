@@ -281,7 +281,7 @@
                             title:'Sucesso',
                             type: 'success',
                             title: 'Novo funcionário cadastrado com sucesso.',
-                            showConfirmButton: false,
+                            showConfirmButton: true,
                             timer: 1500
                         })
                         .then(function() {

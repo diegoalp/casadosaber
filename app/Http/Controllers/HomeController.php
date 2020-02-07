@@ -32,6 +32,11 @@ class HomeController extends Controller
         return view('turmas');
     }
 
+    public function professores()
+    {
+        return view('funcionarios.listar_professores');
+    }
+
     public function usuarios()
     {
         return view('usuarios');

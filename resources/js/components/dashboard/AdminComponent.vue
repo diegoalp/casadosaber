@@ -12,7 +12,7 @@
                 <div class="icon">
                     <i class="ion ion-person"></i>
                 </div>
-                <a href="#" class="small-box-footer">Listar <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/alunos" class="small-box-footer">Listar <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">Listar <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/professores" class="small-box-footer">Listar <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
 

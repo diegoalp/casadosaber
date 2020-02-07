@@ -32,6 +32,7 @@ Vue.component('turmas-component', require('./components/TurmasComponent.vue').de
 Vue.component('usuarios-component', require('./components/UsuariosComponent.vue').default);
 Vue.component('novofuncionario-component', require('./components/funcionarios/NovoFuncionarioComponent.vue').default);
 Vue.component('funcionarios-component', require('./components/funcionarios/FuncionariosComponent.vue').default);
+Vue.component('funcionariosprofessores-component', require('./components/funcionarios/FuncionariosProfessoresComponent.vue').default);
 Vue.component('funcionarios_removidos-component', require('./components/funcionarios/FuncionariosRemovidosComponent.vue').default);
 Vue.component('novoaluno-component', require('./components/alunos/NovoAlunoComponent.vue').default);
 Vue.component('alunos-component', require('./components/alunos/AlunosComponent.vue').default);
