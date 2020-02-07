@@ -45,7 +45,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="/usuarios" class="small-box-footer">Ver <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
                     <i class="ion ion-pie-graph"></i>
                 </div>
                 <a href="javascript:void(0);" v-on:click="novoAno" class="small-box-footer">
-                    Novo ano letivo <i class="fa fa-arrow-circle-right"></i>
+                    INICIAR NOVO ANO LETIVO <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
